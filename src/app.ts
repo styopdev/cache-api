@@ -2,6 +2,10 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
+import * as mongoose from 'mongoose';
+
+require('./models/cache');
+
 import cache from './routes/cache';
 
 import cookieParser = require('cookie-parser'); // this module doesn't use the ES6 default export yet
@@ -48,6 +52,5 @@ app.use((error: any, req, res, next) => {
   res.send(error.message);
   return null;
 });
-
 
 export default app;

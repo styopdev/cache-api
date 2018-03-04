@@ -3,15 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var app_1 = require("./app");
 var debugModule = require("debug");
 var http = require("http");
+var mongoose = require("mongoose");
 var debug = debugModule('node-express-typescript:server');
+var server = http.createServer(app_1.default);
+var dbConnection = function () {
+    var options = { server: { socketOptions: { keepAlive: 1 } } };
+    return mongoose.connect('mongodb://localhost:27017/cache-api', options);
+};
+var listen = function () {
+    return server.listen(port)
+        .on('error', onError)
+        .on('listening', onListening);
+};
 // Get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || '3000');
 app_1.default.set('port', port);
 // create server and listen on provided port (on all network interfaces).
-var server = http.createServer(app_1.default);
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+dbConnection()
+    .then(function () {
+    console.info('Successfully connected to db');
+    return listen();
+})
+    .then(function () {
+    console.info('Successfully runed server');
+})
+    .catch(function (error) {
+    console.error(error);
+});
 /**
  * Normalize a port into a number, string, or false.
  */

@@ -17,7 +17,8 @@
     "jade": "~1.11.0",
     "mongoose": "^5.0.8",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.1",

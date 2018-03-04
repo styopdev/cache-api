@@ -4,6 +4,7 @@ var express = require("express");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 var path = require("path");
+require('./models/cache');
 var cache_1 = require("./routes/cache");
 var cookieParser = require("cookie-parser"); // this module doesn't use the ES6 default export yet
 var app = express();
