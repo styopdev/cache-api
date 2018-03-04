@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./out/www.js",
+    "start": "node ./node_modules/typescript/bin/tsc -p ./src && node ./out/www.js",
     "test": "mocha ./tests/out/test.js",
-    "compile": "node ./node_modules/typescript/bin/tsc -p ./src",
     "compiletests": "node ./node_modules/typescript/bin/tsc -p ./tests"
   },
   "dependencies": {
