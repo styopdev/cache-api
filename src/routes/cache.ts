@@ -37,11 +37,11 @@ cache.get('/:key', (req, res) => {
   Cache.findOne({ key })
     .then((cache) => {
       if (cache) {
-        console.log('Cache hit', cache);
+        console.log('Cache hit');
         return res.send(cache.data);
       } else {
         console.log('Cache miss');
-        return Cache.create(generateHash(key));
+        return new Cache(generateHash(key)).save();
       }
     })
     .then((cache) => {

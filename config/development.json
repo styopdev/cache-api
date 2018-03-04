@@ -6,5 +6,6 @@
         "name": "cache-api"
     },
     "port": 3000,
-    "cache_ttl": 10
+    "cache_ttl": 10,
+    "cache_limit": 10
 }
