@@ -1,0 +1,9 @@
+{
+    "db": {
+        "host": "localhost:27017",
+        "username": "",
+        "password": "",
+        "name": "cache-api"
+    },
+    "port": 3001
+}

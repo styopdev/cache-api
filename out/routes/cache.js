@@ -11,10 +11,17 @@ var generateHash = function (key) {
         data: uuid()
     };
 };
+var toResponse = function (cache) {
+    console.log('cache 17', cache);
+    return {
+        key: cache.key,
+        data: cache.data
+    };
+};
 /* GET home page. */
 cache.get('/', function (req, res) {
     Cache.find({})
-        .select({ _id: 0, __v: 0 })
+        .select({ _id: 0, __v: 0, createdAt: 0 })
         .then(function (caches) { return res.send(caches); })
         .catch(function (err) {
         res.status(500);
@@ -26,7 +33,7 @@ cache.get('/:key', function (req, res) {
     Cache.findOne({ key: key })
         .then(function (cache) {
         if (cache) {
-            console.log('Cache hit');
+            console.log('Cache hit', cache);
             return res.send(cache.data);
         }
         else {
@@ -35,9 +42,9 @@ cache.get('/:key', function (req, res) {
         }
     })
         .then(function (cache) {
-        if (cache) {
+        if (cache instanceof Cache) {
             res.status(201);
-            return res.send(cache);
+            return res.send(cache.data);
         }
     })
         .catch(function (err) {
@@ -57,7 +64,7 @@ cache.post('/', function (req, res) {
     cache.data = data;
     cache.save()
         .then(function () {
-        res.send(cache);
+        res.send(toResponse(cache));
     })
         .catch(function (err) {
         res.status(500);

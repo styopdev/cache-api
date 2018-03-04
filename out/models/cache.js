@@ -12,6 +12,11 @@ var CacheSchema = new Schema({
     data: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        expires: 3600,
+        default: Date.now
     }
 });
 mongoose.model('Cache', CacheSchema);

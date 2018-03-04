@@ -13,10 +13,18 @@ const generateHash = (key?) => {
   }
 };
 
+const toResponse = (cache) => {
+  console.log('cache 17', cache);
+  return {
+    key: cache.key,
+    data: cache.data
+  }
+};
+
 /* GET home page. */
 cache.get('/', (req, res) => {
   Cache.find({})
-    .select({ _id: 0, __v: 0 })
+    .select({ _id: 0, __v: 0, createdAt: 0 })
     .then((caches) => res.send(caches))
     .catch((err) => {
       res.status(500);
@@ -29,7 +37,7 @@ cache.get('/:key', (req, res) => {
   Cache.findOne({ key })
     .then((cache) => {
       if (cache) {
-        console.log('Cache hit');
+        console.log('Cache hit', cache);
         return res.send(cache.data);
       } else {
         console.log('Cache miss');
@@ -37,9 +45,9 @@ cache.get('/:key', (req, res) => {
       }
     })
     .then((cache) => {
-      if (cache) {
+      if (cache instanceof Cache) {
         res.status(201);
-        return res.send(cache);
+        return res.send(cache.data);
       }
     })
     .catch((err) => {
@@ -61,7 +69,7 @@ cache.post('/', (req, res) => {
   cache.data = data;
   cache.save()
     .then(() => {
-      res.send(cache);
+      res.send(toResponse(cache));
     })
     .catch((err) => {
       res.status(500);

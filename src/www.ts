@@ -2,13 +2,19 @@ import app from './app';
 import * as debugModule from 'debug';
 import * as http from 'http';
 import * as mongoose from 'mongoose';
+import * as config from 'config';
 
 const debug = debugModule('node-express-typescript:server');
 const server = http.createServer(app);
 
 const dbConnection = () => {
   const options = { server: { socketOptions: { keepAlive: 1 } } };
-  return mongoose.connect('mongodb://localhost:27017/cache-api', options);
+  const host = config.get('db.host');
+  const username = config.get('db.username');
+  const password = config.get('db.password');
+  const name = config.get('db.name');
+
+  return mongoose.connect(`mongodb://${username && password ? (username + ':' + password + '@') : ''}${host}/${name}`, options);
 };
 
 const listen = () => {
@@ -18,7 +24,7 @@ const listen = () => {
 }
 
 // Get port from environment and store in Express.
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || config.get('port'));
 app.set('port', port);
 
 // create server and listen on provided port (on all network interfaces).
