@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as config from 'config';
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
@@ -15,7 +16,7 @@ const CacheSchema = new Schema({
     },
     createdAt: { 
         type: Date,
-        expires: 3600,
+        expires: config.get('cache_ttl'),
         default: Date.now
     }
 });
