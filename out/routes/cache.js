@@ -42,7 +42,7 @@ cache.get('/:key', function (req, res) {
     })
         .catch(function (err) {
         res.status(500);
-        return res.send("Error " + err.message + " occurred");
+        return res.send("Error \"" + err.message + "\" occurred");
     });
 });
 cache.post('/', function (req, res) {
@@ -61,7 +61,25 @@ cache.post('/', function (req, res) {
     })
         .catch(function (err) {
         res.status(500);
-        res.send("Error " + err.message + " occurred");
+        res.send("Error \"" + err.message + "\" occurred");
+    });
+});
+cache.put('/:key', function (req, res) {
+    var key = req.params.key;
+    var data = req.body.data;
+    Cache.update({ key: key }, { $set: { key: key, data: data } })
+        .then(function (updated) {
+        if (updated.nModified) {
+            return res.status(200).end();
+        }
+        else {
+            res.status(404);
+            return res.send('Cache not found');
+        }
+    })
+        .catch(function (err) {
+        res.status(500);
+        return res.send("Error \"" + err.message + "\" occurred");
     });
 });
 cache.post('/delete', function (req, res) {

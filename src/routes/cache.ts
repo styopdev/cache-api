@@ -69,6 +69,25 @@ cache.post('/', (req, res) => {
     });
 });
 
+cache.put('/:key', (req, res) => {
+  const key = req.params.key;
+  const data = req.body.data;
+
+  Cache.update({ key }, { $set: { key, data} })
+    .then((updated) => {
+      if (updated.nModified) {
+        return res.status(200).end();
+      } else {
+        res.status(404);
+        return res.send('Cache not found');
+      }
+    })
+    .catch((err) => {
+      res.status(500);
+      return res.send(`Error "${err.message}" occurred`);
+    });
+});
+
 cache.post('/delete', (req, res) => {
   Cache.remove({})
     .then(() => {
