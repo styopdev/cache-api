@@ -1,14 +1,14 @@
-# README
-## This the readme for your application "node-express-typescript" 
+## "Cache REST API" 
 -------------------
-### Visual Studio Code has *awesome* Markdown support!
+### Installation
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
+* npm i
+* edit your configurations in src/config/(dev|prod) file
+* npm start
 
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](http://daringfireball.net)
-
-**Enjoy!**
+### Rest documentation
+* `GET - /cache` list of caches.
+* `GET - /cache/:key` get or create and get if not exists.
+* `POST - /cache/delete` delete all caches.
+* `DELETE - /cache/:key` delete a cache by key.
+* `PUT - /cache/:key` body `{ data: <STRING> }` get or create and get if not exists.
