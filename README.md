@@ -1,4 +1,4 @@
-## "Cache REST API" 
+## Cache REST API"
 -------------------
 ### Installation
 
@@ -6,7 +6,7 @@
 * edit your configurations in src/config/(dev|prod) file
 * npm start
 
-### Rest documentation
+### REST documentation
 * `GET - /cache` list of caches.
 * `GET - /cache/:key` get or create and get if not exists.
 * `POST - /cache/delete` delete all caches.
