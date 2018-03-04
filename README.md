@@ -11,4 +11,5 @@
 * `GET - /cache/:key` get or create and get if not exists.
 * `POST - /cache/delete` delete all caches.
 * `DELETE - /cache/:key` delete a cache by key.
-* `PUT - /cache/:key` body `{ data: <STRING> }` get or create and get if not exists.
+* `POST - /cache` body `{ key: <STRING>, data: <STRING> }` add new.
+* `PUT - /cache/:key` body `{ data: <STRING> }` update cache.

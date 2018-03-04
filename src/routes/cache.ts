@@ -14,7 +14,6 @@ const generateHash = (key?) => {
 };
 
 const toResponse = (cache) => {
-  console.log('cache 17', cache);
   return {
     key: cache.key,
     data: cache.data
